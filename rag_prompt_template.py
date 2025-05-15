@@ -64,36 +64,6 @@ triplets:\
 Note: Only output the triplets.\
 
 """
-
-# ======================================
-# snomed relation extraction
-# ======================================
-snomed_relation_extraction_prompt = """\
-Here is the context: {text}.\
-
-Task: Extract the SNOMED CT triples from the given context with the format of (concept 1 ; relation ; concept 2).\
-
-Here is the optional relation list: [temporally follows, after, due to, has realization, associated with, has definitional manifestation, 
-associated finding, associated aetiologic finding, associated etiologic finding, interprets, associated morphology, causative agent, course, 
-finding site, temporally related to, pathological process, direct morphology, is modification of, measures, direct substance, has active ingredient, using, part of].\
-
-The steps are as follows:\
-1. extract the concept 1 and concept 2 from the given context sentence, using the retrieved sub-graph.
-2. select ONE most likely relation from the list for the extracted concepts.
-3. output the triplets in the format of (concept 1 ; relation ; concept 2) strictly.\
-\
-
-Provide your answer as follows:
-
-Answer:::
-Triples: (The extracted triples)\
-Answer End:::\
-
-You MUST provide values for 'Triples:' in your answer.\
-
-"""
-
-
 # ======================================
 # snomed description generation
 # ======================================
