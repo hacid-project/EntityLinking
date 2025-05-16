@@ -64,34 +64,6 @@ triplets:\
 Note: Only output the triplets.\
 
 """
-# ======================================
-# snomed description generation
-# ======================================
-snomed_description_generation_prompt = """\
-Here is the context: {text}.\
-
-Here is the optional relation list: [temporally follows, after, due to, has realization, associated with, has definitional manifestation, 
-associated finding, associated aetiologic finding, associated etiologic finding, interprets, associated morphology, causative agent, course, 
-finding site, temporally related to, pathological process, direct morphology, is modification of, measures, direct substance, has active ingredient, using, part of].\
-
-Task: Generate the SNOMED CT descriptions for the given concept.
-
-The steps are as follows:
-1. extract the concept 1 from the given context sentence, using the retrieved sub-graph.
-2. generate the concept 2 that can describe the concept 1, and select ONE most likely relation from the list for the concept 1.
-3. output (concept 1 ; relation ; concept 2) strictly as one generated description.
-4. Each extracted concept could have multiple descriptions.\
-
-Provide your answer as follows:
-
-Answer:::
-[Extracted Concept] (The generated description) (The generated description)\
-Answer End:::\
-
-You MUST provide values for 'Extracted Concept' and 'The generated descriptions' in your answer.\
-
-"""
-
 
 # ======================================
 # BC5CDR entity-type extraction
