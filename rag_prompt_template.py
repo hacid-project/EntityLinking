@@ -25,21 +25,32 @@ relation_list = [
 ]
 
 # ======================================
-# snomed concepts extraction zbeta
+# MIMIC-IV snomed entity extraction
 # ======================================
-snomed_extraction_prompt_zbeta = """\
-Extract the most likely concepts with type from the given context with the format of "(concept; type)".\
-
+MIMICIV_entity_extraction_prompt = """\
 Here is the context: {text}.\
 
-concepts:\
+Task: Extract the SNOMED CT concepts from the given context.\
 
+The steps are as follows:\
+1. extract the concepts from the given context sentence, using the retrieved triplets.
+2. there may be abbreviations or acronyms in the context, extract them as concepts as well if they are related to the concepts.
+3. output the concepts in a list [] strictly, each concept is separated by a comma.\
 \
 
-Note: Only the SNOMED CT concepts are allowed; Compound phrase first; Remove repetition; Only output concepts and types.\
+Provide your answer as follows:
+
+Answer:::
+Concepts: [] \
+Answer End:::\
+
+Requirements:\
+You MUST provide values for 'Concepts:' in your answer. \
+ONLY extract concepts, DO NOT include the type of the concept, reasoning, or any other information. \
+DO NOT include mark numbers or ordinal numbers in your answer. \
+Extract as many unique concepts as possible from the given context. \
 
 """
-
 
 # ======================================
 # snomed concepts extraction
@@ -95,41 +106,6 @@ Extract as many valid entity-type pairs as possible from the given context abstr
 
 """
 
-
-# ======================================
-# BC5CDR entity-type extraction with additional entities
-# ======================================
-BC5CDR_extraction_prompt_with_entities = """\
-You are a medical professional working in a hospital. You have been given a medical abstract, a list of entities, and a list of types. Your task is to link the entities to the most likely type from the type list.
-
-Here is the abstract: {text}.\
-
-Here is the type list: [Disorder, Substance].\
-
-Here is the list of entities for consideration: {entities}.\
-
-Task: link the entity and the type and output entity-type pairs with the format of (entity ; type).\
-
-The steps are as follows:
-1. for each entity in {entities}, link it to the most likely type from the type list. if you cannot find a suitable type, ignore the entity.
-2. if you find more entities in the abstract, extract them and link them to the most likely type.
-3. output the pairs in the format of (entity ; type) strictly.\
-\
-
-Provide your answer as follows:
-
-Answer:::
-Pairs: (entity ; type)
-Answer End:::\
-
-Requirements:
-You MUST provide values for 'Pairs:' in your answer. 
-ONLY use the type in the type list: [Disorder, Substance]. 
-ONLY output valid entity-type pairs without any reasoning. 
-
-"""
-
-
 # ======================================
 # NCBIdevelopset entity-type extraction
 # ======================================
@@ -160,34 +136,6 @@ Extract as many valid entity-type pairs as possible from the given context abstr
 
 """
 
-
-# ======================================
-# MIMIC-IV snomed entity extraction
-# ======================================
-MIMICIV_entity_extraction_prompt = """\
-Here is the context: {text}.\
-
-Task: Extract the SNOMED CT concepts from the given context.\
-
-The steps are as follows:\
-1. extract the concepts from the given context sentence, using the retrieved triplets.
-2. there may be abbreviations or acronyms in the context, extract them as concepts as well if they are related to the concepts.
-3. output the concepts in a list [] strictly, each concept is separated by a comma.\
-\
-
-Provide your answer as follows:
-
-Answer:::
-Concepts: [] \
-Answer End:::\
-
-Requirements:\
-You MUST provide values for 'Concepts:' in your answer. \
-ONLY extract concepts, DO NOT include the type of the concept, reasoning, or any other information. \
-DO NOT include mark numbers or ordinal numbers in your answer. \
-Extract as many unique concepts as possible from the given context. \
-
-"""
 
 # ======================================
 # MIMIC-IV entity-type extraction
